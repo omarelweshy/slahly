@@ -1,0 +1,90 @@
+{% load static %} 
+{% load widget_tweaks %}
+{% include 'static.html' %}
+
+<!DOCTYPE html>
+<html>
+  <title>إنشاء حساب | صلحلى</title>
+  <body class="bg-gradient-primary">
+    <div class="container">
+      <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+          <div class="row">
+            <div class="col-lg-5 d-none d-lg-flex">
+              <div
+                class="flex-grow-1 bg-register-image"
+                style="
+                  background-image: url('/static/img/logo1.png');
+                "
+              ></div>
+            </div>
+            <div class="col-lg-7">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="text-dark mb-4" style="font-family: 'Almarai'; font-size:30px;font-weight: bold;">إنشاء حساب جديد</h1>
+                </div>
+                <form class="user" method="post">
+                  {% csrf_token %}
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      {% render_field form.first_name class+="form-control form-control-user autofocus" type="text" placeholder=form.first_name.label name="first_name" %}
+                    </div>
+                    <div class="col-sm-6">
+                      {% render_field form.last_name class+="form-control form-control-user" type="text" placeholder=form.last_name.label name="last_name" %}
+                    </div>
+                  </div>
+                  <div class="form-group">
+                      {% render_field form.email class+="form-control form-control-user" type="email" placeholder=form.email.label name="email" %}
+                  </div>
+                  <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    {% render_field form.username class+="form-control form-control-user" type="text" placeholder=form.username.label name="username" %}
+                  </div>
+                  <div class="col-sm-6">
+                    {% render_field form.gender class+="form-control form-control-user" field_type="checkbox" placeholder=form.gender.label name="gender" %}
+                  </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                    {% render_field form.password1 class+="form-control form-control-user" field_type="password1" placeholder=form.password1.label name="password1" %}
+                    </div>
+                    <div class="col-sm-6">
+                    {% render_field form.password2 class+="form-control form-control-user" field_type="password2" placeholder=form.password2.label name="password2" %}
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-primary btn-block text-white btn-user" 
+                    type="submit" style="font-family: 'Almarai'; font-size:20px"
+                  >
+                    إنشاء حساب جديد
+                  </button>
+                  <hr />
+                  <a
+                    class="btn btn-danger btn-block text-white btn-google btn-user"
+                    role="button"
+                    ><i class="fab fa-google"></i>&nbsp; تسجيل الدخول بحساب جوجل</a
+                  ><a
+                    class="btn btn-blue btn-block text-white btn-facebook btn-user"
+                    role="button"
+                    ><i class="fab fa-facebook-f"></i>&nbsp; تسجيل الدخول بحساب الفيسبوك</a
+                  >
+                  <hr />
+                </form>
+                <div class="text-center">
+                  <a class="small" href="forgot-password.html" style="font-family: 'Almarai'; font-size: larger"
+                    >نسيت كلمة المرور ؟</a
+                  >
+                </div>
+                <div class="text-center">
+                  <a class="small" href="{% url 'account_login' %}" style="font-family: 'Almarai'; font-size: larger"
+                    >بالفعل لديك حساب ؟ سجل الدخول</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
