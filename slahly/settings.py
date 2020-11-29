@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     # Apps
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'service.apps.ServiceConfig',
 
     # 3td party apps
     'allauth',

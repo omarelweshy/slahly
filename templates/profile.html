@@ -1,0 +1,142 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<title>الملف الشخصى | {{user.full_name}}</title>
+
+<body>
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4" style="font-family: 'Almarai'; text-align: center;">الملف الشخصى</h3>
+    <div class="row mb-3">
+        <div class="col-lg-4">
+            <!-- <div class="card mb-3">
+                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{user.photo.url}}" width="160" height="160">
+                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">تغيير الصورة</button></div>
+                </div>
+            </div> -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="text-primary font-weight-bold m-0" style="font-family: 'Almarai'; text-align: center;">سجل الطلبات</h6>
+                </div>
+                <div class="card-body">
+                    <h4 class="small font-weight-bold" style="font-family: 'Almarai'; text-align: center;">لم يتم تقديم طلبات</h4>
+                </div>
+            </div> 
+        </div>
+        <div class="col-lg-8">
+            <div class="row mb-3 d-none">
+                <div class="col">
+                    <div class="card text-white bg-primary shadow">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card text-white bg-success shadow">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold" style="font-family: 'Almarai'; text-align: center;">بيانات المستخدم</p>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="col">
+                                        
+                                        <div class="form-group"><label for="username" style="font-family: 'Almarai';"><strong>اسم المستخدم</strong></label>
+                                            {% render_field form.username class+="form-control" type_field="text" placeholder="اسم المستخدم" name="username" %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group"><label for="email" style="font-family: 'Almarai';"><strong>البريد الالكترونى</strong></label>
+                                            {% render_field form.email class+="form-control" type_field="email" placeholder="user@example.com" name="email" %}                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group"><label for="first_name" style="font-family: 'Almarai';"><strong>الاسم الاول</strong></label>
+                                            {% render_field form.first_name class+="form-control" type_field="text" placeholder="الاسم الاول" name="first_name" %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group"><label for="last_name" style="font-family: 'Almarai';"><strong>الاسم الاخير</strong></label>
+                                            {% render_field form.last_name class+="form-control" type_field="text" placeholder="الاسم الاخير" name="last_name" %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="address" style="font-family: 'Almarai'; text-align: left;"><strong>العنوان التفصيلى</strong></label>
+                                    {% render_field form.address class+="form-control" type_field="text" placeholder="ش النبوى عماره رقم 369" name="address" %}
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group"><label for="city" style="font-family: 'Almarai'; text-align: left;"><strong>المدينة</strong></label>
+                                            {% render_field form.city class+="form-control" type_field="text" placeholder="كقرالشيخ" name="city" %}
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group"><label for="phone" style="font-family: 'Almarai'; text-align: left;"><strong>رقم التليفون</strong></label>
+                                            {% render_field form.phone class+="form-control" type_field="number" placeholder="+20102030701862" maxlength="13" name="phone" %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="font-family: 'Almarai';">حفظ التغييرات</button></div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 font-weight-bold" style="font-family: 'Almarai'; text-align: center;">معلومات التواصل</p>
+                        </div>
+                        <div class="card-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="form-group"><label for="address" style="font-family: 'Almarai'; text-align: left;"><strong>العنوان التفصيلى</strong></label>
+                                    {% render_field form.address class+="form-control" type_field="text" placeholder="ش النبوى عماره رقم 369" name="address" %}
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group"><label for="city" style="font-family: 'Almarai'; text-align: left;"><strong>المدينة</strong></label>
+                                            {% render_field form.city class+="form-control" type_field="text" placeholder="كقرالشيخ" name="city" %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="font-family: 'Almarai'; text-align: left;">حفظ التغييرات</button></div>
+                            </form>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card shadow mb-5">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">Forum Settings</p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <div class="form-group"><label for="signature"><strong>Signature</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                        <div class="form-group">
+                            <div class="custom-control custom-switch"><input class="custom-control-input" type="checkbox" id="formCheck-1"><label class="custom-control-label" for="formCheck-1"><strong>Notify me about new replies</strong></label></div>
+                        </div>
+                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+</div>
+</div>
+</body>
+{% endblock content %}
+    

@@ -13,3 +13,9 @@ class UserCreationForm(UserCreationForm):
 class UserLoginForm(LoginForm):
     class Meta:
         model = get_user_model()
+
+
+class UserChangeForm(UserChangeForm):
+    class Meta:
+        model = get_user_model()
+        fields = '__all__'
