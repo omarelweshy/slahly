@@ -1,12 +1,14 @@
-
 from pathlib import Path
+from decouple import config
+
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
 
-SECRET_KEY = 'bf-g*b+%0(ijmcxknym%tx*&wv6sr8(1d85bv44&2mu@hg2nzd'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
 SITE_ID = 1
@@ -45,6 +47,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'slahly.urls'
+ALLOW_UNICODE_SLUGS = True
+
 
 # Authentication
 
@@ -63,6 +67,19 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+
+# Email config
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -87,9 +104,9 @@ WSGI_APPLICATION = 'slahly.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'slahly',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
         'HOST': 'localhost',
         'PORT': '3306',
     }

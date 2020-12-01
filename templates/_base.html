@@ -51,7 +51,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' %}"
+              <a class="nav-link" href="{% url 'job' %}"
                 ><i class="fas fa-briefcase"></i
                 ><span style="font-family: 'Almarai'; font-size: large">
                   طلبات توظيف</span
@@ -67,6 +67,14 @@
               >
             </li>
             {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}"
+                ><i class="fas fa-store"></i
+                ><span style="font-family: 'Almarai'; font-size: large">
+                  المتجر</span
+                ></a
+              >
+            </li>
           </ul>
           <div class="text-center d-none d-md-inline">
             <button

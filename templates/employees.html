@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+<title>{{service.name}}</title>
+
+<div class="team-boxed">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">موظفين {{service.name}}</h2>
+          
+            {% if service.employee.count == 0 %}
+
+            <h1><p class="text-center">مفيش حد هنا</p></h1>
+            {% else %}
+            <p class="text-center">اختر موظف</p>
+
+            {% endif %}
+        </div>
+        <div class="row people">
+            {% for employee in service.employee.all %}
+                           
+            <div class="col-md-6 col-lg-4 item">
+                <div class="box"><img class="rounded-circle" src="/static/img/1.jpg">
+                    <h3 class="name">{{employee.name}}</h3>
+                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p><a class="btn btn-sm animated-button victoria-one"
+                        href="#" style="color: #4e73df;border-top-color: #4e73df;border-right-color: #4e73df;border-bottom-color: #4e73df;border-left-color: #4e73df;">read more</a></div>
+            </div>  
+            {% endfor %}
+                
+        </div>
+    </div>
+</div>
+{% endblock content %}
+    

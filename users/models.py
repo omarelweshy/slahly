@@ -14,8 +14,12 @@ class User(AbstractUser):
         _("المدينة"), max_length=50, blank=False, editable=True)
     address = models.CharField(
         _("العنوان التفصيلى"), max_length=225, blank=False, editable=True)
-    phone = models.IntegerField(_("رقم الهاتف"))
+    phone = models.IntegerField(_("رقم الهاتف"), unique=True, null=True)
     email = models.EmailField(_("البريد الالكترونى"), max_length=254, unique=True)
+
+    class Meta:
+        verbose_name = _('المستخدم')
+        verbose_name_plural = _('المستخدمين')
 
     def get_absolute_url(self):
         return reverse('profile_detail', args=[str(self.slug)])
