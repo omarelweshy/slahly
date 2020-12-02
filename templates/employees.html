@@ -1,8 +1,9 @@
 {% extends '_base.html' %}
 {% load static %}
 
+{% block title %} {{service.name}} {% endblock title %}
+    
 {% block content %}
-<title>{{service.name}}</title>
 
 <div class="team-boxed">
     <div class="container">
@@ -21,10 +22,10 @@
             {% for employee in service.employee.all %}
                            
             <div class="col-md-6 col-lg-4 item">
-                <div class="box"><img class="rounded-circle" src="/static/img/1.jpg">
+                <div class="box"><img class="rounded-circle" style="height: 150px!important; width: 230px;" src="{{employee.photo.url}}">
                     <h3 class="name">{{employee.name}}</h3>
-                    <p class="description">Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus est, et interdum justo suscipit id. Etiam dictum feugiat tellus, a semper massa. </p><a class="btn btn-sm animated-button victoria-one"
-                        href="#" style="color: #4e73df;border-top-color: #4e73df;border-right-color: #4e73df;border-bottom-color: #4e73df;border-left-color: #4e73df;">read more</a></div>
+                    <h5 class="description">{{employee.about|truncatechars_html:60}} عرض المزيد</h5><a class="btn btn-sm animated-button victoria-one"
+                        href="{% url 'employee_detail' employee.id %}" style="color: #4e73df;border-color: #4e73df;">عرض التفاصيل</a></div>
             </div>  
             {% endfor %}
                 

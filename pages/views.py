@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import *
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.http import HttpResponse, HttpResponseRedirect
 from service.models import Service, Employee
+from django.contrib import messages
 
 class HomeView(TemplateView):
     template_name = "home.html"
@@ -21,6 +22,9 @@ def Employees(request, pk):
     }
     return render(request, 'employees.html', context)
 
+def EmployeeDetail(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    return render(request, 'employee_detail.html', {'employee': employee})
 
 def JobApplicate(request):
     if request.method == 'POST':
@@ -28,20 +32,17 @@ def JobApplicate(request):
         email = request.POST['email']
         phone = request.POST['phone']
         about = request.POST['about']
-        
-        send_mail(
+        email = EmailMessage(
             'طلب عمل من ' + name,
-            'نبذة عنى :' + about + '\n' + 'رقم الهاتف : ' + phone + '\n' + 'البريد الالكترونى : ' + email,
+            'الاسم : ' +  name + '\n' 'نبذة عنى :' + about + '\n' + 'رقم الهاتف : ' + phone + '\n' + 'البريد الالكترونى : ' + email,
             email,
             ['omarelweshy@gmail.com',],
         )
-        return HttpResponse('Done!')
+        email.send()
+        messages.success(request, 'سيتم الرد عليك فى اقرب وقت ممكن.')
+        return redirect('job')
     else:
         return render(request, 'job_applicat.html', {})
 
 
 
-
-
-
-    #          return redirect('success')

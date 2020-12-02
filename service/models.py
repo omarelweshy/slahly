@@ -21,7 +21,11 @@ class Service(models.Model):
 
 class Employee(models.Model):
     service = models.ForeignKey(Service, verbose_name=_("الخدمة"), on_delete=models.CASCADE, related_name='employee')
+    id = models.AutoField(primary_key=True)
     name = models.CharField(_("اسم الموظف"), max_length=50)
+    photo = models.ImageField(_("صورة الموظف"))
+    about = models.CharField(_("معلومات الموظف"), max_length=225)
+
 
     def __str__(self):
         return self.name

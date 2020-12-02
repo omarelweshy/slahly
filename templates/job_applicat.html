@@ -1,8 +1,22 @@
 {% extends '_base.html' %}
 {% load static %}
 
-
+{% block title %} طلب توظيف فى صلحلى {% endblock title %}
 {% block content %}
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-{{ message.tags }}" role="alert">
+
+  <h4 class="alert-heading" style="font-family: 'Almarai'; text-align: center; "><i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح</h4>
+  <p style="font-family: 'Almarai'; text-align: right;">{{message}}</p>
+  <hr>
+  <p class="mb-0" style="font-family: 'Almarai'; text-align: right;">salahly2021@gmail.com للمزيد من الاستفسارات قم بالتواصل معنا فى قسم اتصل بنا او راسلنا على البريد الالكترونى</p>
+  {% endfor %}
+</div>
+{% endif %}
+
 <main class="page hire-me-page">
     <section class="portfolio-block hire-me">
         <div class="container">
@@ -16,12 +30,13 @@
                 <div class="form-group"><label for="email" style="font-family: 'Almarai';">البريد الالكترونى</label><input class="form-control" type="email" name="email"></div>
                 <div class="form-group"><label for="phone" style="font-family: 'Almarai';">رقم الهاتف</label><input class="form-control" type="text" name="phone"></div>
                 <div class="form-group"><label for="about" style="font-family: 'Almarai';">نبذه عنك</label><textarea class="form-control" name="about"></textarea></div>
-                <div class="form-group"><label for="photo" style="font-family: 'Almarai';">صورتك الشخصية&nbsp; &nbsp; &nbsp;</label><input name="photo" type="file"></div>
+                <!-- <div class="form-group"><label for="photo" style="font-family: 'Almarai';">صورتك الشخصية&nbsp; &nbsp; &nbsp;</label><input name="photo" type="file"></div> -->
                 <!-- <div class="form-group"><label for="work" style="font-family: 'Almarai';">اعمال سابقة&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</label><input type="file"></div>  -->
                 <div class="col-md-2 button mr-2" style="text-align: center;"><button class="btn btn-primary btn-block" type="submit" style="font-family: 'Almarai';">ارسال الطلب</button></style=>
         </form>
         </div>
     </section>
 </main>
+
 {% endblock content %}
     

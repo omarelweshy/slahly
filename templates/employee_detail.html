@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+
+<div class="text-center profile-card" style="margin:15px;background-color:#ffffff;">
+    <div style="padding: 99px; border-radius: 50%!important;"><img class="rounded-circle" src="{{employee.photo.url}}" style="height: 230px!important; width: 230px;">
+        <h3 style="height: 38px;padding: 38px;">{{employee.name}}</h3>
+        <p style="padding: 20px;padding-bottom: 0;padding-top: 5px;margin: 6px;">{{employee.about}}</p><div>
+<button type="button" class="btn btn-primary btn-lg">Large button</button>
+
+</div></div>
+</div>
+{% endblock content %}
