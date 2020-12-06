@@ -29,12 +29,16 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'service.apps.ServiceConfig',
+    'orders.apps.OrdersConfig',
 
     # 3td party apps
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'widget_tweaks',
+    'crispy_forms',
+    'djmoney',
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +53,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'slahly.urls'
 ALLOW_UNICODE_SLUGS = True
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Authentication
@@ -62,7 +67,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'users.forms.UserCreationForm',
-                 'login': 'allauth.account.forms.LoginForm',}
+                 'login': 'allauth.account.forms.LoginForm',
+                 'change_password': 'allauth.account.forms.ChangePasswordForm',}
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -161,6 +167,11 @@ STATIC_ROOT = Path.joinpath(BASE_DIR / 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')
+
+# Stripe
+
+STRIPE_TEST_PUBLISHABLE_KEY = config('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
 
 
 # MESSAGE_TAGS = {

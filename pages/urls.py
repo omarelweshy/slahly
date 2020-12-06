@@ -10,4 +10,6 @@ urlpatterns = [
     path('service/<int:pk>', Employees, name='employees'),
     path('employee/<int:pk>', EmployeeDetail, name='employee_detail'),
     path('job-application', JobApplicate, name='job'),
+    path('store', SparePartsTemplateView.as_view(), name='store'),
+    # path('charge', charge, name='charge'),
 ]
