@@ -1,20 +1,20 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %} {{service.name}} خدمة{% endblock title %}
+{% block title %} خدمة {{service.name}} {% endblock title %}
     
 {% block content %}
 
 <div class="team-boxed">
     <div class="container">
         <div class="intro">
-            <h2 class="text-center">موظفين {{service.name}}</h2>
+            <h2 class="text-center" style="font-family: 'Almarai';">موظفين {{service.name}}</h2>
           
             {% if service.employee.count == 0 %}
 
-            <h1><p class="text-center">مفيش حد هنا</p></h1>
+            <h1><p class="text-center" style="font-family: 'Almarai';"> ﻻ يتوافر عاملين لخدمة {{service.name}} فى الوقت الحالى</p></h1>
             {% else %}
-            <p class="text-center">اختر موظف</p>
+            <p class="text-center" style="font-family: 'Almarai'; font-size: large;">اختر موظف</p>
 
             {% endif %}
         </div>
@@ -24,11 +24,10 @@
             <div class="col-md-6 col-lg-4 item">
                 <div class="box"><img class="rounded-circle" style="height: 150px!important; width: 230px;" src="{{employee.photo.url}}">
                     <h3 class="name">{{employee.name}}</h3>
-                    <h5 class="description">{{employee.about|truncatechars_html:60}} عرض المزيد</h5><a class="btn btn-sm animated-button victoria-one"
+                    <h5 class="description">{{employee.about|truncatechars_html:60}}</h5><a class="btn btn-sm animated-button victoria-one"
                         href="{% url 'employee_detail' employee.id %}" style="color: #4e73df;border-color: #4e73df;">عرض التفاصيل</a></div>
             </div>  
             {% endfor %}
-                
         </div>
     </div>
 </div>

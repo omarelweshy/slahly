@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+
+
+{% block title %} الطلبات {% endblock title %}
+    
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-{{ message.tags }}" role="alert">
+
+  <h4 class="alert-heading" style="font-family: 'Almarai'; text-align: center; "><i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح</h4>
+  <p style="font-family: 'Almarai'; text-align: right;">{{message}}</p>
+  <hr>
+  <p class="mb-0" style="font-family: 'Almarai'; text-align: right;">salahly2021@gmail.com للمزيد من الاستفسارات قم بالتواصل معنا فى قسم اتصل بنا او راسلنا على البريد الالكترونى</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+  <table class="table">
+    <thead >
+      <tr style="background-color: #4e73df;">
+        <th class="col-auto mr-auto" style="color: #ffffff;">كود الطلب</th>
+        <th scope="col" style="color: #ffffff;">الموظف</th>
+        <th scope="col" style="color: #ffffff;">المشكلة</th>
+        <th scope="col" style="color: #ffffff;">وقت الطلب</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for request in requests %}
+      <tr>
+        <th style="font-family: 'Almarai'; text-align: left;">{{request.id}}</th>
+        <td style="font-family: 'Almarai'; text-align: left;">{{request.employee}}</td>
+        <td style="font-family: 'Almarai'; text-align: left;">{{request.problem}}</td>
+        <td style="font-family: 'Almarai'; text-align: left;">{{request.date}}</td>
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+{% endblock content %}
+    

@@ -2,7 +2,19 @@ from pathlib import Path
 from decouple import config
 from django.contrib.messages import constants as messages
 
+# django-debug-toolbar
+INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
 
+DEBUG_TOOLBAR_CONFIG = {
+    'DISABLE_PANELS': [
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ],
+    'SHOW_TEMPLATE_CONTEXT': True,
+}
+DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False,}
+
+def show_toolbar(request):
+    return True
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
@@ -10,6 +22,10 @@ TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
+
+DEBUG_TOOLBAR_CONFIG = {
+    "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
+}
 
 ALLOWED_HOSTS = []
 SITE_ID = 1
@@ -32,12 +48,14 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
 
     # 3td party apps
+    'debug_toolbar',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'widget_tweaks',
     'crispy_forms',
     'djmoney',
+    'author',
 
 ]
 
@@ -49,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'author.middlewares.AuthorDefaultBackendMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'slahly.urls'

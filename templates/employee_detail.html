@@ -1,14 +1,67 @@
 {% extends '_base.html' %}
+{% load widget_tweaks %}
 
+{% block title %} {{employee.name}} {% endblock title %}
+    
 
 {% block content %}
-
-<div class="text-center profile-card" style="margin:15px;background-color:#ffffff;">
+<!-- <div class="text-center profile-card" style="margin:15px;background-color:#ffffff;">
     <div style="padding: 99px; border-radius: 50%!important;"><img class="rounded-circle" src="{{employee.photo.url}}" style="height: 230px!important; width: 230px;">
         <h3 style="height: 38px;padding: 38px;">{{employee.name}}</h3>
         <p style="padding: 20px;padding-bottom: 0;padding-top: 5px;margin: 6px;">{{employee.about}}</p><div>
 <button type="button" class="btn btn-primary btn-lg">Large button</button>
 
 </div></div>
+</div> -->
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-{{ message.tags }}" role="alert">
+
+  <h4 class="alert-heading" style="font-family: 'Almarai'; text-align: center; "><i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح</h4>
+  <p style="font-family: 'Almarai'; text-align: right;">{{message}}</p>
+  <hr>
+  <p class="mb-0" style="font-family: 'Almarai'; text-align: right;">salahly2021@gmail.com للمزيد من الاستفسارات قم بالتواصل معنا فى قسم اتصل بنا او راسلنا على البريد الالكترونى</p>
+  {% endfor %}
 </div>
+{% endif %}
+<div class="row">
+    <div class="col-md-21">
+        <div class="row">
+            <div class="col-md-12"><img class="img-thumbnail center-block" height="310px" width="310px" src="{{employee.photo.url}}"></div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h1 style="font-family: 'Almarai'; font-size: 30px;">{{employee.name}}</h1>
+        <p style="font-family: 'Almarai'; font-size: small; text-align: left;">{{employee.about}} </p>
+        <!-- <p style="font-family: 'Almarai'; font-size: large;"></p>
+        <p style="font-family: 'Almarai'; font-size: large;"> </p> -->
+        <div class="text-left star-rating" style="font-size: 25px;color: #f9dd16;">
+            <span style="font-family: 'Almarai'; font-size: large;color: #000000; "><strong>التقييم : </strong></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px; display: black;" data-rating="1"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="2"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="3"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="4"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="5"></span>
+            <input class="form-control rating-value" type="hidden" id="rate" name="Rating" value="{{employee.rate}}" /></div>
+</div>
+    </div>
+</div>
+<div>
+<div class="container">
+    <div class="col-md-5" style="text-align: center; width: 50%;   margin-left: auto; margin-right: auto;">
+            <h1 style="font-family: 'Almarai'; font-size: 30px;">أطلب الان</h1>
+            <hr>
+        <form method="post">
+            {% csrf_token %}
+            {% render_field form.problem type_field="text" cols="40" rows="5" placeholder="قم بوصف المشكلة للموظف" %}
+            <hr>
+            <button class="btn btn-primary btn-block" type="submit" style="font-family: 'Almarai';">ارسال الطلب</button>
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+
+
 {% endblock content %}

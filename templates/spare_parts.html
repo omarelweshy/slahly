@@ -27,7 +27,7 @@
                     </tr>
                     {% for part in parts %}
                     <tr>
-                        <td style="font-family: 'Almarai'; font-size: medium; text-align: right;"><img src="{% static 'img/1.jpg' %}" style="height: 60px!important; width: 60px;"></td>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: right;"><img src="{{part.photo.url}}" style="height: 60px!important; width: 60px;"></td>
                         <td style="font-family: 'Almarai'; font-size: medium; text-align: right;">{{part.name}}</td>
                         <td style="font-family: 'Almarai'; font-size: medium; text-align: center;">{{part.service}}</td>
                         <td style="font-family: 'Almarai'; font-size: medium; text-align: center;">{{part.price}}</td>
