@@ -69,7 +69,8 @@ class Request(models.Model):
 
     def __str__(self):
         return 'الطلب # %s للموظف %s' % (self.id, self.employee)
- 
+
     class Meta:
         verbose_name = _('الطلب')
         verbose_name_plural = _('الطلبات')
+        ordering = ['-id']

@@ -74,8 +74,8 @@ def JobApplicate(request):
     else:
         return render(request, 'job_applicat.html', {})
 
-def Requests(request):
-    requests = Request.objects.all()
+def Requests(request, id):
+    requests = Request.objects.filter()
     return render(request, 'requests.html', {'requests': requests})
 
 class EmployeeDetailView(FormMixin, DetailView):

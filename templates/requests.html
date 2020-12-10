@@ -17,26 +17,40 @@
   {% endfor %}
 </div>
 {% endif %}
+<div class="intro">
+    <hr>
+    <h2 class="text-center" style="font-family: 'Almarai';">سجل الطلبات</h2>
+    <hr>
+  
+    {% if requests.count == 0 %}
+    <h1><p class="text-center" style="font-family: 'Almarai';"> لم تقم بأى طلبات</p></h1>
+    {% endif %}
+    
+</div>
 
   <table class="table">
     <thead >
       <tr style="background-color: #4e73df;">
-        <th class="col-auto mr-auto" style="color: #ffffff;">كود الطلب</th>
-        <th scope="col" style="color: #ffffff;">الموظف</th>
-        <th scope="col" style="color: #ffffff;">المشكلة</th>
-        <th scope="col" style="color: #ffffff;">وقت الطلب</th>
+        <th class="col-auto mr-auto" style="color: #ffffff; font-family: 'Almarai';text-align: center;">كود الطلب</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;">الموظف</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;">المشكلة</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;">وقت الطلب</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;"></th>
       </tr>
     </thead>
     <tbody>
         {% for request in requests %}
       <tr>
-        <th style="font-family: 'Almarai'; text-align: left;">{{request.id}}</th>
-        <td style="font-family: 'Almarai'; text-align: left;">{{request.employee}}</td>
-        <td style="font-family: 'Almarai'; text-align: left;">{{request.problem}}</td>
-        <td style="font-family: 'Almarai'; text-align: left;">{{request.date}}</td>
+        <th style="font-family: 'Almarai'; text-align: center;">#{{request.id}}</th>
+        <td style="font-family: 'Almarai'; text-align: center;">{{request.employee}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;">{{request.problem|truncatechars_html:60}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;">{{request.date|date:'Y/m/d - h:i'}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;">
+            <button class="btn btn-success disabled">تم التنفيذ</button>
+        <button class="btn btn-danger">إبلاغ</button>
+        </td>
       </tr>
       {% endfor %}
-
     </tbody>
   </table>
 {% endblock content %}
