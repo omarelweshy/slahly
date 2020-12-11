@@ -66,7 +66,8 @@ class Request(models.Model):
     employee = models.ForeignKey(Employee, verbose_name=_("الموظف"), on_delete=models.CASCADE)
     problem = models.TextField(_("المشكلة"))
     date = models.DateTimeField(_("وقت الطلب"), auto_now=True)
-    done = models.BooleanField(_("تم تنفيذ الخدمة"), default=False)
+    status = models.BooleanField(_("تم تنفيذ الخدمة"), default=False)
+    show_in_history = models.BooleanField(_("إظهار فى السجل"), default=True)
 
     def __str__(self):
         return 'الطلب # %s للموظف %s' % (self.id, self.employee)

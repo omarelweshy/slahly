@@ -8,7 +8,7 @@ from .models import User
 class UserCreationForm(UserCreationForm):
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'username', 'email',)
+        fields = ('first_name', 'last_name', 'username', 'email', 'address',)
 
 class UserLoginForm(LoginForm):
     class Meta:

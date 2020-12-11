@@ -6,9 +6,11 @@ from service.models import Service, Employee, SpareParts, Request
 from django.contrib import messages
 from django.conf import settings
 import stripe
-from .forms import RequestJobForm
+from .forms import RequestJobForm, RequestDoneForm
 from django.views.generic.edit import FormMixin, ModelFormMixin
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.db.models import F
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
@@ -75,9 +77,18 @@ def JobApplicate(request):
         return render(request, 'job_applicat.html', {})
 
 def Requests(request):
-    requests = Request.objects.filter(user=request.user)
-    return render(request, 'requests.html', {'requests': requests})
+    requests = Request.objects.filter(user=request.user).filter(show_in_history=True)
+    return render(request, 'requests.html', {'requests': requests,})
 
+@csrf_exempt
+def UpdateStatus(request, pk):
+    request = Request.objects.filter(pk=pk).update(status=True)
+    return redirect('requests')
+
+@csrf_exempt
+def UpdateHistory(request, pk):
+    request = Request.objects.filter(pk=pk).update(show_in_history=False)
+    return redirect('requests')
 
 class EmployeeDetailView(FormMixin, DetailView):
     model = Employee

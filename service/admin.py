@@ -8,8 +8,8 @@ admin.site.register(SpareParts)
 
 @admin.register(Request)
 class RequestAdmin(admin.ModelAdmin):
-    list_display = ["__str__", "done", "get_user_name", "employee"]
-    list_filter = ("done", "employee")
+    list_display = ["__str__", "status", "get_user_name", "employee"]
+    list_filter = ("status", "employee")
 
     def get_user_name(self, obj):
         return obj.user.full_name
