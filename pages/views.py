@@ -23,7 +23,7 @@ class ServiceListView(ListView):
     template_name = "service.html"
 
 
-def Employees(request, pk):
+def ServiceEmployeesList(request, pk):
     service = get_object_or_404(Service, pk=pk)
     employees = Employee.objects.all()
     context = {
@@ -74,9 +74,10 @@ def JobApplicate(request):
     else:
         return render(request, 'job_applicat.html', {})
 
-def Requests(request, id):
-    requests = Request.objects.filter()
+def Requests(request):
+    requests = Request.objects.filter(user=request.user)
     return render(request, 'requests.html', {'requests': requests})
+
 
 class EmployeeDetailView(FormMixin, DetailView):
     model = Employee
@@ -84,10 +85,9 @@ class EmployeeDetailView(FormMixin, DetailView):
     template_name = "employee_detail.html"
 
     def get_success_url(self):
-         if True:
-            messages.add_message(self.request, messages.INFO,
+        messages.add_message(self.request, messages.INFO,
                                   'تم إرسال طلبك إلى الموظف بنجاح وسوف يواصل معك خلال 15 دقيقة')
-            return reverse('requests')
+        return reverse('requests')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()

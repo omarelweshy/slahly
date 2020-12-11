@@ -42,12 +42,19 @@
         {% for request in requests %}
       <tr>
         <th style="font-family: 'Almarai'; text-align: center;">#{{request.id}}</th>
-        <td style="font-family: 'Almarai'; text-align: center;">{{request.employee}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;"> ({{request.employee.service}}) {{request.employee}}</td>
         <td style="font-family: 'Almarai'; text-align: center;">{{request.problem|truncatechars_html:60}}</td>
         <td style="font-family: 'Almarai'; text-align: center;">{{request.date|date:'Y/m/d - h:i'}}</td>
         <td style="font-family: 'Almarai'; text-align: center;">
-            <button class="btn btn-success disabled">تم التنفيذ</button>
-        <button class="btn btn-danger">إبلاغ</button>
+          
+          {% if request.done == False %}
+          <button class="btn btn-success">تأكيد التنفيذ</button>
+          <button class="btn btn-danger">إبلاغ</button>
+          {% else %}
+          <button class="btn btn-success disabled">تم التنفيذ</button>
+          <button class="btn btn-danger">إخفاء</button>
+          {% endif %}
+            
         </td>
       </tr>
       {% endfor %}
