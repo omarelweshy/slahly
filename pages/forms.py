@@ -6,9 +6,3 @@ class RequestJobForm(forms.ModelForm):
         model = Request
         exclude = ('employee', 'user',)
         fields = ['problem']
-
-class RequestDoneForm(forms.ModelForm):
-    class Meta:
-        model = Request
-        exclude = ('employee', 'user', 'problem',)
-        fields = ['status']

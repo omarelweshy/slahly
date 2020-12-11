@@ -45,14 +45,17 @@
                       {% render_field form.last_name class+="form-control form-control-user" type="text" placeholder=form.last_name.label name="last_name" %}
                     </div>
                   </div>
-                  <div class="form-group">
-                      {% render_field form.email class+="form-control form-control-user" type="email" placeholder=form.email.label name="email" %}
-                  </div>
                   <div class="form-group row">
-                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        {% render_field form.email class+="form-control form-control-user" type="email" placeholder=form.email.label name="email" %}
+                    </div>
+                  <div class="col-sm-6">
                     {% render_field form.username class+="form-control form-control-user" type="text" placeholder=form.username.label name="username" %}
                   </div>
-                  </div>
+                </div>
+                  <div class="form-group">
+                    {% render_field form.address class+="form-control form-control-user" field_type="text" placeholder=form.address.label name="address" %}
+                    </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-3 mb-sm-0">
                     {% render_field form.password1 class+="form-control form-control-user" field_type="password1" placeholder=form.password1.label name="password1" %}

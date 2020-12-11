@@ -15,7 +15,7 @@ class ProfileView(SuccessMessageMixin, UpdateView):
     model = User
     form = UserChangeForm
     template_name = 'profile.html'
-    fields = ['first_name', 'last_name', 'email', 'username', 'address', 'city', 'phone']
+    fields = ['first_name', 'last_name', 'email', 'username', 'address', 'phone']
     success_url = reverse_lazy('profile')
     success_message = 'تم تحديث معلوماتك بنجاح'
 

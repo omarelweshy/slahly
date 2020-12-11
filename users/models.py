@@ -10,8 +10,6 @@ GENDER_CHOICES = [('MALE', 'أنثى'), ('FEMALE', 'ذكر')]
 class User(AbstractUser):
     first_name = models.CharField(_("الاسم الاول"), max_length=20)
     last_name = models.CharField(_("الاسم الاخير"), max_length=20)
-    city = models.CharField(
-        _("المدينة"), max_length=50, blank=False, editable=True)
     address = models.CharField(
         _("العنوان التفصيلى"), max_length=225, blank=False, editable=True)
     phone = models.IntegerField(_("رقم الهاتف"), unique=True, null=True)

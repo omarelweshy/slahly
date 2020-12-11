@@ -3,16 +3,8 @@
 
 {% block title %} {{employee.name}} {% endblock title %}
     
-
 {% block content %}
-<!-- <div class="text-center profile-card" style="margin:15px;background-color:#ffffff;">
-    <div style="padding: 99px; border-radius: 50%!important;"><img class="rounded-circle" src="{{employee.photo.url}}" style="height: 230px!important; width: 230px;">
-        <h3 style="height: 38px;padding: 38px;">{{employee.name}}</h3>
-        <p style="padding: 20px;padding-bottom: 0;padding-top: 5px;margin: 6px;">{{employee.about}}</p><div>
-<button type="button" class="btn btn-primary btn-lg">Large button</button>
 
-</div></div>
-</div> -->
 {% if messages %}
 {% for message in messages %}
 
@@ -25,6 +17,7 @@
   {% endfor %}
 </div>
 {% endif %}
+
 <div class="row">
     <div class="col-md-21">
         <div class="row">
@@ -34,8 +27,6 @@
     <div class="col-md-5">
         <h1 style="font-family: 'Almarai'; font-size: 30px;">{{employee.name}}</h1>
         <p style="font-family: 'Almarai'; font-size: small; text-align: left;">{{employee.about}} </p>
-        <!-- <p style="font-family: 'Almarai'; font-size: large;"></p>
-        <p style="font-family: 'Almarai'; font-size: large;"> </p> -->
         <div class="text-left star-rating" style="font-size: 25px;color: #f9dd16;">
             <span style="font-family: 'Almarai'; font-size: large;color: #000000; "><strong>التقييم : </strong></span>
             <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px; display: black;" data-rating="1"></span>
@@ -60,6 +51,28 @@
         </form>
     </div>
     </div>
+
+
+    <!-- <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 font-weight-bold">Forum Settings</p>
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <form>
+                            <div class="form-group"><label for="signature"><strong>Signature</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch"><input class="custom-control-input" type="checkbox" id="formCheck-1"><label class="custom-control-label" for="formCheck-1"><strong>Notify me about new replies</strong></label></div>
+                            </div>
+                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </div>
 </div>
 
