@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from allauth.account.forms import LoginForm
+from allauth.account.forms import LoginForm, ChangePasswordForm
 from django.utils.translation import gettext as _
 from django.forms import ModelForm
 from .models import User
@@ -19,3 +19,7 @@ class UserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = '__all__'
+
+class ChangePasswordForm(ChangePasswordForm):
+     def save(self):
+        super(ChangePasswordForm, self).save()

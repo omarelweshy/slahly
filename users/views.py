@@ -21,3 +21,4 @@ class ProfileView(SuccessMessageMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+

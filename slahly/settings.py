@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'djmoney',
-    'author',
 
 ]
 
@@ -67,7 +66,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'author.middlewares.AuthorDefaultBackendMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
@@ -161,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Cairo'
 
 USE_I18N = True
 
@@ -170,7 +168,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
+# Static files
 
 STATIC_URL = '/static/'
 
@@ -181,9 +179,9 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'static'),]
-STATIC_ROOT = Path.joinpath(BASE_DIR / 'staticfiles')
+# STATIC_ROOT = Path.joinpath(BASE_DIR / 'static',)
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')
@@ -192,12 +190,3 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')
 
 STRIPE_TEST_PUBLISHABLE_KEY = config('STRIPE_TEST_PUBLISHABLE_KEY')
 STRIPE_TEST_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
-
-
-# MESSAGE_TAGS = {
-#     messages.DEBUG: 'alert-info',
-#     messages.INFO: 'alert-info',
-#     messages.SUCCESS: 'alert-success',
-#     messages.WARNING: 'alert-warning',
-#     messages.ERROR: 'alert-danger',
-# }

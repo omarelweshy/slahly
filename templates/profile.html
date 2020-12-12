@@ -12,8 +12,8 @@
 <body>
 <div class="container-fluid">
     <h3 class="text-dark mb-4" style="font-family: 'Almarai'; text-align: center;">الملف الشخصى</h3>
-    <div class="lg-auto">
-        <div class="col-lg-10">
+    <div class="center">
+        <div class="center">
             <div class="row mb-3 d-none">
                 <div class="col">
                     <div class="card text-white bg-primary shadow">
@@ -58,11 +58,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group"><label for="address" style="font-family: 'Almarai'; text-align: left;"><strong>العنوان التفصيلى</strong></label>
-                                    {% render_field form.address class+="form-control" type_field="text" placeholder="ش النبوى عماره رقم 369" name="address" %}
-                                </div>
-
                                 <div class="form-row">
+                                    <div class="col">
+                                    <div class="form-group"><label for="address" style="font-family: 'Almarai'; text-align: left;"><strong>العنوان التفصيلى</strong></label>
+                                        {% render_field form.address class+="form-control" type_field="text" placeholder="ش النبوى عماره رقم 369" name="address" %}
+                                    </div>
+                                </div>
                                     <div class="col">
                                         <div class="form-group"><label for="phone" style="font-family: 'Almarai'; text-align: left;"><strong>رقم التليفون</strong></label>
                                             {% render_field form.phone class+="form-control" type_field="number" placeholder="+20102030701862" maxlength="13" name="phone" %}

@@ -3,7 +3,6 @@ from django.utils.translation import gettext as _
 from django.urls import reverse
 from djmoney.models.fields import MoneyField
 from django.contrib.auth import get_user_model
-from author.decorators import with_author
 
 
 CHOICES = (
