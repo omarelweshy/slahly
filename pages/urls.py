@@ -21,4 +21,5 @@ urlpatterns = [
 
     # ! Contacts
     path('job-application', JobApplicate, name='job'),
+    path('contact-us', ContactUs, name='contact_us'),
 ]

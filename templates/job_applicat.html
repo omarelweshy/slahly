@@ -17,26 +17,27 @@
 </div>
 {% endif %}
 
-<main class="page hire-me-page">
-    <section class="portfolio-block hire-me">
-        <div class="container">
-            <div class="col-lg-12 text-center">
-                <h1  style="font-family: 'Almarai'; font-size: 30px;">طلب توظيف فى صلحلى</h1>
-            </div>
-        <form method="post">
-            {% csrf_token %}
-                <!-- <div class="form-group"><label for="subject" style="font-family: 'Almarai';">المجال</label><select class="form-control" id="subject"><option value="" selected="">اختر مجال</option><option value="1">Subject 1</option><option value="2">Subject 2</option><option value="3">Subject 3</option></select></div> -->
-                <div class="form-group"><label for="name" style="font-family: 'Almarai';">الاسم بالكامل</label><input class="form-control" type="text" name="name"></div>
-                <div class="form-group"><label for="email" style="font-family: 'Almarai';">البريد الالكترونى</label><input class="form-control" type="email" name="email"></div>
-                <div class="form-group"><label for="phone" style="font-family: 'Almarai';">رقم الهاتف</label><input class="form-control" type="text" name="phone"></div>
-                <div class="form-group"><label for="about" style="font-family: 'Almarai';">نبذه عنك</label><textarea class="form-control" name="about"></textarea></div>
-                <!-- <div class="form-group"><label for="photo" style="font-family: 'Almarai';">صورتك الشخصية&nbsp; &nbsp; &nbsp;</label><input name="photo" type="file"></div> -->
-                <!-- <div class="form-group"><label for="work" style="font-family: 'Almarai';">اعمال سابقة&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</label><input type="file"></div>  -->
-                <div class="col-md-2 button mr-2" style="text-align: center;"><button class="btn btn-primary btn-block" type="submit" style="font-family: 'Almarai';">ارسال الطلب</button></style>
-        </form>
+<div class="shadow" style="width: 100%;min-height: 630px;background-color: rgba(255,255,255,0.79);">
+    <form style="padding-top: 50px;" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <h1 class="text-center" style="font-family: 'Almarai';">تقديم طلب توظيف فى صلحلى</h1>
         </div>
-    </section>
-</main>
 
+        <div class="form-group"><input class="form-control form-control-lg" type="text" name="name" style="width: 50%;margin-left: 25%; font-family: 'Almarai';" required="" placeholder="الاسم"></div>
+        <div class="form-group"><input class="form-control form-control-lg" type="email" name="email" style="width: 50%;margin-left: 25%; font-family: 'Almarai';" placeholder="البريد الالكترونى"></div>
+        <div class="form-group"><input class="form-control form-control-lg" type="text" name="phone" style="width: 50%;margin-left: 25%; font-family: 'Almarai';" placeholder="ادخل رقم الهاتف"></div>
+        <div class="form-group">
+            <select class="form-control" style="width: 50%;margin-left: 25%; font-family: 'Almarai';" name="service" >
+                <option value="" disabled selected hidden style="font-family: 'Almarai';" >أختر الخدمة </option>
+                {% for s in services %}
+                <option value="{{s}}" style="font-family: 'Almarai';">{{s}}</option>
+                {% endfor %}
+              </select>
+        </div>
+        <div class="form-group"><textarea class="form-control form-control-lg" name="about" style="width: 50%;margin-left: 25%;min-height: 200px; font-family: 'Almarai';" placeholder="نبذة عنك"></textarea></div>
+        <div class="form-group"><button class="btn btn-primary" style="width: 50%;margin-left: 25%; font-family: 'Almarai';" type="submit">ارسال</button></div>
+    </form>
+</div>
 {% endblock content %}
     

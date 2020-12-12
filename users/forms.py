@@ -19,7 +19,3 @@ class UserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
         fields = '__all__'
-
-class ChangePasswordForm(ChangePasswordForm):
-     def save(self):
-        super(ChangePasswordForm, self).save()

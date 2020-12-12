@@ -22,3 +22,9 @@ class ProfileView(SuccessMessageMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
+def disable_account(request):
+    user = request.user
+    user.is_active = False
+    user.save()
+    messages.success(request, 'تم تعطيل حسابك ')
+    return redirect('home')

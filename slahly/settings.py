@@ -3,6 +3,7 @@ from decouple import config
 from django.contrib.messages import constants as messages
 
 # django-debug-toolbar
+
 INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -27,8 +28,7 @@ DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
 }
 
-ALLOWED_HOSTS = []
-SITE_ID = 1
+
 
 # Application definition
 
@@ -72,7 +72,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'slahly.urls'
 ALLOW_UNICODE_SLUGS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
+ALLOWED_HOSTS = []
+SITE_ID = 1
 
 # Authentication
 
@@ -86,7 +87,7 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'users.forms.UserCreationForm',
                  'login': 'allauth.account.forms.LoginForm',
-                 'change_password': 'allauth.account.forms.ChangePasswordForm',}
+                 'change_password': 'users.forms.ChangePasswordForm',}
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -102,7 +103,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-
 
 
 TEMPLATES = [
@@ -139,25 +139,25 @@ DATABASES = {
 
 # Password validation
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+#     },
+#     {
+#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+#     },
+# ]
 
 
 # Internationalization
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ar-EG'
 
 TIME_ZONE = 'Africa/Cairo'
 
