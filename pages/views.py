@@ -10,6 +10,8 @@ from .forms import RequestJobForm
 from django.views.generic.edit import FormMixin
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 # ! Home Page 
@@ -26,6 +28,7 @@ class ServiceListView(ListView):
     template_name = "service/service.html"
 
 
+@login_required(login_url='/account/login/')
 def ServiceEmployeesList(request, pk):
     service = get_object_or_404(Service, pk=pk)
     employees = Employee.objects.all()
@@ -35,9 +38,10 @@ def ServiceEmployeesList(request, pk):
     }
     return render(request, 'service/employees.html', context)
 
-class EmployeeDetailView(FormMixin, DetailView):
+class EmployeeDetailView(LoginRequiredMixin, FormMixin, DetailView):
     model = Employee
     form_class = RequestJobForm
+    login_url = "account_login"
     template_name = "service/employee_detail.html"
 
     def get_success_url(self):
@@ -63,6 +67,7 @@ class EmployeeDetailView(FormMixin, DetailView):
 
 # ! Requests
 
+@login_required(login_url='/account/login/')
 def Requests(request):
     requests = Request.objects.filter(user=request.user).filter(show_in_history=True)
     return render(request, 'requests.html', {'requests': requests,})
@@ -80,10 +85,11 @@ def UpdateHistory(request, pk):
 
 # ! Spare Parts
 
-class SparePartsTemplateView(ListView):
+class SparePartsTemplateView(LoginRequiredMixin, ListView):
     template_name = "spare_parts.html"
     model = SpareParts
     context_object_name = 'parts'
+    login_url = "account_login"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

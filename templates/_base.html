@@ -50,22 +50,6 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'job' %}"
-                ><i class="fas fa-briefcase"></i
-                ><span style="font-family: 'Almarai'; font-size: large">
-                  طلبات توظيف</span
-                ></a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact_us' %}"
-                ><i class="fas fa-briefcase"></i
-                ><span style="font-family: 'Almarai'; font-size: large">
-                 تواصل معنا</span
-                ></a
-              >
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="{% url 'requests' %}"
                 ><i class="fas fa-history"></i
                 ><span style="font-family: 'Almarai'; font-size: large">
@@ -82,6 +66,23 @@
                 ></a
               >
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'job' %}"
+                ><i class="fas fa-briefcase"></i
+                ><span style="font-family: 'Almarai'; font-size: large">
+                  طلبات توظيف</span
+                ></a
+              >
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact_us' %}"
+                ><i class="fas fa-headset"></i
+                ><span style="font-family: 'Almarai'; font-size: large">
+                 تواصل معنا</span
+                ></a
+              >
+            </li>
+            
           </ul>
           <div class="text-center d-none d-md-inline">
             <button
@@ -98,51 +99,7 @@
             class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top"
           >
             <div class="container-fluid">
-              <!-- <form
-                class="form-inline d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-              >
-                <div class="input-group">
-                  <input
-                    class="bg-light form-control border-0 small"
-                    type="text"
-                    placeholder="Search for ..."
-                  />
-                  <div class="input-group-append">
-                    <button class="btn btn-primary py-0" type="button">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </div>
-              </form> -->
               <ul class="nav navbar-nav flex-nowrap ml-auto ">
-                <li class="nav-item dropdown d-sm-none no-arrow">
-                  <a
-                    class="dropdown-toggle nav-link"
-                    data-toggle="dropdown"
-                    aria-expanded="false"
-                    href="#"
-                    ><i class="fas fa-search"></i
-                  ></a>
-                  <div
-                    class="dropdown-menu dropdown-menu-right p-3 animated--grow-in"
-                    aria-labelledby="searchDropdown"
-                  >
-                    <form class="form-inline mr-auto navbar-search w-100">
-                      <div class="input-group">
-                        <input
-                          class="bg-light form-control border-0 small"
-                          type="text"
-                          placeholder="Search for ..."
-                        />
-                        <div class="input-group-append">
-                          <button class="btn btn-primary py-0" type="button">
-                            <i class="fas fa-search"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </li>
                 {% if user.is_authenticated %}
                 <li>
                    <span class="d-none d-lg-inline mr-2 " style="font-family: 'Almarai';">{{user.full_name}} مرحبا</span>
