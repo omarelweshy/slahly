@@ -1,0 +1,80 @@
+{% extends '_base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} {{employee.name}} {% endblock title %}
+    
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-{{ message.tags }}" role="alert">
+
+  <h4 class="alert-heading" style="font-family: 'Almarai'; text-align: center; "><i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح</h4>
+  <p style="font-family: 'Almarai'; text-align: right;">{{message}}</p>
+  <hr>
+  <p class="mb-0" style="font-family: 'Almarai'; text-align: right;">salahly2021@gmail.com للمزيد من الاستفسارات قم بالتواصل معنا فى قسم اتصل بنا او راسلنا على البريد الالكترونى</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-md-21">
+        <div class="row">
+            <div class="col-md-12"><img class="img-thumbnail center-block" height="310px" width="310px" src="{{employee.photo.url}}"></div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h1 style="font-family: 'Almarai'; font-size: 30px;">{{employee.name}}</h1>
+        <p style="font-family: 'Almarai'; font-size: small; text-align: left;">{{employee.about}} </p>
+        <div class="text-left star-rating" style="font-size: 25px;color: #f9dd16;">
+            <span style="font-family: 'Almarai'; font-size: large;color: #000000; "><strong>التقييم : </strong></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px; display: black;" data-rating="1"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="2"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="3"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="4"></span>
+            <span class="fa fa-star-o" style="padding-right: 1px;padding-left: 1px;" data-rating="5"></span>
+            <input class="form-control rating-value" type="hidden" id="rate" name="Rating" value="{{employee.rate}}" /></div>
+</div>
+    </div>
+</div>
+<div>
+<div class="container">
+    <div class="col-md-5" style="text-align: center; width: 50%;   margin-left: auto; margin-right: auto;">
+            <h1 style="font-family: 'Almarai'; font-size: 30px;">أطلب الان</h1>
+            <hr>
+        <form method="post">
+            {% csrf_token %}
+            {% render_field form.problem type_field="text" cols="40" rows="5" placeholder="قم بوصف المشكلة للموظف" %}
+            <hr>
+            <button class="btn btn-primary btn-block" type="submit" style="font-family: 'Almarai';">ارسال الطلب</button>
+        </form>
+    </div>
+    </div>
+
+
+    <!-- <div class="container-fluid">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 font-weight-bold">Forum Settings</p>
+            </div>
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <form>
+                            <div class="form-group"><label for="signature"><strong>Signature</strong><br></label><textarea class="form-control" rows="4" name="signature"></textarea></div>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch"><input class="custom-control-input" type="checkbox" id="formCheck-1"><label class="custom-control-label" for="formCheck-1"><strong>Notify me about new replies</strong></label></div>
+                            </div>
+                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save Settings</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+</div>
+
+
+{% endblock content %}

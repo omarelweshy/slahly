@@ -1,0 +1,50 @@
+{% extends '_base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+{% block content %}        
+<body>
+    <div class="col-md-12 search-table-col">
+        <div class="form-group pull-lift col-lg-4"><input type="text" class="search form-control" placeholder="ابحث عن اسم المنتج هنا .."></div><span class="counter pull-right"></span>
+        <div class="table-responsive table-bordered table table-hover table-bordered results">
+            <table class="table table-bordered table-hover">
+                <thead class="bill-header cs">
+                    <tr>
+                        <!-- class="col-lg-2" -->
+                        <th id="trs-hd" style="font-family: 'Almarai'; font-size: large">صورة المنتج</th>
+                        <th id="trs-hd"  style="font-family: 'Almarai'; font-size: large">اسم المنتج</th>
+                        <th id="trs-hd"  style="font-family: 'Almarai'; font-size: large">الخدمة</th>
+                        <th id="trs-hd"  style="font-family: 'Almarai'; font-size: large">السعر</th>
+                        <th id="trs-hd" style="font-family: 'Almarai'; font-size: large">التفاصيل</th>
+                        <th id="trs-hd"  style="font-family: 'Almarai'; font-size: large"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning no-result">
+                        <td colspan="12 style=" style="font-family: 'Almarai'; font-size: larger; text-align: center;"></i>ﻻ يوجد نتائج للبحث </td>
+                    </tr>
+                    {% for part in parts %}
+                    <tr>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: right;"><img src="{{part.photo.url}}" style="height: 60px!important; width: 60px;"></td>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: right;">{{part.name}}</td>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: center;">{{part.service}}</td>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: center;">{{part.price}}</td>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: right;">{{part.details}}</td>
+                        <td style="font-family: 'Almarai'; font-size: medium; text-align: right;">
+                            <!-- <form action="url" method="post"> -->
+                                <!-- {% csrf_token %} -->
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ stripe_key }}" data-description="{{part.name}}" data-amount="{{part.price_currency}}"></script>
+                        <!-- </form> -->
+                            <button class="btn btn-success" type="submit">توصيل</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+{% endblock content %}
+

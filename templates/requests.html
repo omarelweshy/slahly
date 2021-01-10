@@ -1,0 +1,70 @@
+{% extends '_base.html' %}
+
+
+{% block title %} الطلبات {% endblock title %}
+    
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-{{ message.tags }}" role="alert">
+
+  <h4 class="alert-heading" style="font-family: 'Almarai'; text-align: center; "><i class="fas fa-check-circle"></i> تم إرسال طلبك بنجاح</h4>
+  <p style="font-family: 'Almarai'; text-align: right;">{{message}}</p>
+  <hr>
+  <p class="mb-0" style="font-family: 'Almarai'; text-align: right;">salahly2021@gmail.com للمزيد من الاستفسارات قم بالتواصل معنا فى قسم اتصل بنا او راسلنا على البريد الالكترونى</p>
+  {% endfor %}
+</div>
+{% endif %}
+<div class="intro">
+    <hr>
+    <h2 class="text-center" style="font-family: 'Almarai';">سجل الطلبات</h2>
+    <hr>
+  
+    {% if requests.count == 0 %}
+    <h1><p class="text-center" style="font-family: 'Almarai';"> لم تقم بأى طلبات</p></h1>
+    {% endif %}
+    
+</div>
+
+  <table class="table">
+    {% if requests %}
+
+    <thead >
+      <tr style="background-color: #4e73df;">
+        <th class="col-auto mr-auto" style="color: #ffffff; font-family: 'Almarai';text-align: center;">كود الطلب</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;">الموظف</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;">المشكلة</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;">وقت الطلب</th>
+        <th scope="col" style="color: #ffffff; font-family: 'Almarai'; text-align: center;"></th>
+      </tr>
+    </thead>
+    {% endif %}
+
+    <tbody>
+        {% for request in requests %}
+      <tr>
+        <th style="font-family: 'Almarai'; text-align: center;">#{{request.id}}</th>
+        <td style="font-family: 'Almarai'; text-align: center;"> ({{request.employee.service}}) {{request.employee}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;">{{request.problem|truncatechars_html:60}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;">{{request.date|date:'Y/m/d - h:i'}}</td>
+        <td style="font-family: 'Almarai'; text-align: center;">
+          
+          {% if request.status == False %}
+
+            <a href="{% url 'UpdateStatus' pk=request.pk %}" class='btn btn-success'>تأكيد التنفيذ</a>
+            <button class="btn btn-danger">إبلاغ</button>
+          {% else %}
+          <button class="btn btn-success disabled">تم التنفيذ</button>
+          <a href="{% url 'UpdateHistory' pk=request.pk %}" class='btn btn-danger'>إخفاء</a>
+          {% endif %}
+            
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}
+    
