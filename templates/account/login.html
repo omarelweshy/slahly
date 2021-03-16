@@ -1,5 +1,6 @@
 {% load static %} 
 {% load widget_tweaks %}
+{% load socialaccount %}
 {% include 'static.html' %}
 
 <html>
@@ -54,8 +55,8 @@
                         <a 
                           class="btn btn-danger btn-block text-white btn-google btn-user"
                           role="button" style="font-family: 'Almarai';"
-                          ><i class="fab fa-google" ></i>&nbsp; تسجيل الدخول بحساب جوجل</a
-                        >
+                          href="{% provider_login_url 'google' %}"
+                          ><i class="fab fa-google" ></i>&nbsp; تسجيل الدخول بحساب جوجل</a>
                         <hr />
                     </form>
                     <div class="text-center">

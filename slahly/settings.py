@@ -4,18 +4,25 @@ from django.contrib.messages import constants as messages
 
 # django-debug-toolbar
 
-INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
+# /////////////////////////////////////////////////////////////
 
-DEBUG_TOOLBAR_CONFIG = {
-    'DISABLE_PANELS': [
-        'debug_toolbar.panels.redirects.RedirectsPanel',
-    ],
-    'SHOW_TEMPLATE_CONTEXT': True,
-}
-DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False,}
+# INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
 
-def show_toolbar(request):
-    return True
+# DEBUG_TOOLBAR_CONFIG = {
+#     'DISABLE_PANELS': [
+#         'debug_toolbar.panels.redirects.RedirectsPanel',
+#     ],
+#     'SHOW_TEMPLATE_CONTEXT': True,
+# }
+# DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False,}
+
+# def show_toolbar(request):
+#     return True
+
+# DEBUG_TOOLBAR_CONFIG = {
+#     "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
+# }
+# //////////////////////////////////////////////////////////////
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
@@ -23,11 +30,6 @@ TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
-}
-
 
 
 # Application definition
@@ -52,10 +54,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'widget_tweaks',
     'crispy_forms',
     'djmoney',
-
 ]
 
 MIDDLEWARE = [
@@ -72,7 +74,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'slahly.urls'
 ALLOW_UNICODE_SLUGS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 SITE_ID = 1
 
 # Authentication
@@ -93,6 +95,18 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 
 # Email config
