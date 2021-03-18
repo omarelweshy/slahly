@@ -12,6 +12,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.template import RequestContext
+
 
 
 # ! Home Page 
@@ -155,3 +157,11 @@ def ContactUs(request):
     else:
         return render(request, 'contact_us.html', {})
 
+
+# ! Error Handlers
+
+def handler404(request, *args, **argv):
+    response = render('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response

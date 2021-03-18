@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  backend:
+    container_name: slahly_web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - ENVIRONMENT=development
+      - SECRET_KEY
+      - DEBUG
+      - EMAIL_HOST_USER
+      - EMAIL_HOST_PASSWORD
+      - STRIPE_TEST_PUBLISHABLE_KEY
+      - STRIPE_TEST_SECRET_KEY
+    depends_on:
+      - db
+
+  db:
+    container_name: slahly_database
+    image: mysql:5.7
+    restart: always
+    environment:
+      - MYSQL_DATABASE=slahly
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - .db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+      ]

@@ -1,6 +1,6 @@
 from pathlib import Path
-from decouple import config
 from django.contrib.messages import constants as messages
+import os
 
 # django-debug-toolbar
 
@@ -27,10 +27,11 @@ from django.contrib.messages import constants as messages
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
 
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
 
 # Application definition
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'djmoney',
+    "compressor",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +72,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'slahly.urls'
@@ -115,8 +119,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 TEMPLATES = [
@@ -135,18 +139,31 @@ TEMPLATES = [
     },
 ]
 
+
+# COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', True)
+
 WSGI_APPLICATION = 'slahly.wsgi.application'
 
 
 # Database
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': config('DATABASE_NAME'),
+#         'USER': config('DATABASE_USER'),
+#         'PASSWORD': config('DATABASE_PASSWORD'),
+#         'HOST': 'db',
+#         'PORT': '3305',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PASSWORD'),
-        'HOST': 'localhost',
+        'NAME': 'slahly',
+        'USER': 'admin',
+        'PASSWORD': 'root',
+        'HOST': 'db',
         'PORT': '3306',
     }
 }
@@ -191,10 +208,12 @@ LANGUAGE_CODE = 'ar'
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    'compressor.finders.CompressorFinder',
 ]
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'static'),]
-# STATIC_ROOT = Path.joinpath(BASE_DIR / 'static',)
+# STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'staticfiles'),]
+STATIC_ROOT = Path.joinpath(BASE_DIR / 'static',)
 
 
 MEDIA_URL = '/media/'
@@ -202,5 +221,18 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')
 
 # Stripe
 
-STRIPE_TEST_PUBLISHABLE_KEY = config('STRIPE_TEST_PUBLISHABLE_KEY')
-STRIPE_TEST_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
+STRIPE_TEST_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
+
+# Security
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
