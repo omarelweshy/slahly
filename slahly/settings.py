@@ -1,39 +1,18 @@
 from pathlib import Path
-from django.contrib.messages import constants as messages
-import os
+# from django.contrib.messages import constants as messages
+# import os
+import environ
 
-# django-debug-toolbar
-
-# /////////////////////////////////////////////////////////////
-
-# INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
-
-# DEBUG_TOOLBAR_CONFIG = {
-#     'DISABLE_PANELS': [
-#         'debug_toolbar.panels.redirects.RedirectsPanel',
-#     ],
-#     'SHOW_TEMPLATE_CONTEXT': True,
-# }
-# DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False,}
-
-# def show_toolbar(request):
-#     return True
-
-# DEBUG_TOOLBAR_CONFIG = {
-#     "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
-# }
-# //////////////////////////////////////////////////////////////
-
+#  ! ENV
+env = environ.Env()
+environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = int(env('DEBUG', default=0))
+# ENVIRONMENT = env('ENVIRONMENT', default='development')
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
-
-DEBUG = int(os.environ.get('DEBUG', default=0))
-
-ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development')
-
-# Application definition
+# /////////////////////////////////////////////////////////////////////////
+# ! Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    # 'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
@@ -52,7 +31,6 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
 
     # 3td party apps
-    'debug_toolbar',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -71,8 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'slahly.urls'
@@ -80,8 +57,11 @@ ALLOW_UNICODE_SLUGS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ALLOWED_HOSTS = ['*']
 SITE_ID = 1
+COMPRESS_ENABLED = env('COMPRESS_ENABLED')
+WSGI_APPLICATION = 'slahly.wsgi.application'
 
-# Authentication
+# /////////////////////////////////////////////////////////////////////////
+# ! Authentication
 
 AUTH_USER_MODEL = 'users.User'
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
@@ -112,16 +92,9 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-
-# Email config
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-
+# /////////////////////////////////////////////////////////////////////////
+# ! Templates
+TEMPLATE_DIR = Path.joinpath(BASE_DIR / 'templates')
 
 TEMPLATES = [
     {
@@ -140,35 +113,80 @@ TEMPLATES = [
 ]
 
 
-# COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', True)
-
-WSGI_APPLICATION = 'slahly.wsgi.application'
-
-
-# Database
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql', 
-#         'NAME': config('DATABASE_NAME'),
-#         'USER': config('DATABASE_USER'),
-#         'PASSWORD': config('DATABASE_PASSWORD'),
-#         'HOST': 'db',
-#         'PORT': '3305',
-#     }
-# }
+# /////////////////////////////////////////////////////////////////////////
+# ! Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'slahly',
-        'USER': 'admin',
-        'PASSWORD': 'root',
-        'HOST': 'db',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'slahly',
+#         'USER': 'admin',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
 
-# Password validation
+# /////////////////////////////////////////////////////////////////////////
+# ! Internationalization
+
+LANGUAGE_CODE = 'ar-EG'
+
+TIME_ZONE = 'Africa/Cairo'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+# /////////////////////////////////////////////////////////////////////////
+# ! Static files
+
+STATIC_URL = '/static/'
+
+LANGUAGE_CODE = 'ar'
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    'compressor.finders.CompressorFinder',
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'staticfiles'),]
+STATIC_ROOT = Path.joinpath(BASE_DIR / 'static',)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')
+
+# /////////////////////////////////////////////////////////////////////////
+# ! Email config
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# /////////////////////////////////////////////////////////////////////////
+# ! Stripe
+
+STRIPE_TEST_PUBLISHABLE_KEY = env('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY = env('STRIPE_TEST_SECRET_KEY')
+
+# /////////////////////////////////////////////////////////////////////////
+# ! Password validation
 
 # AUTH_PASSWORD_VALIDATORS = [
 #     {
@@ -185,54 +203,38 @@ DATABASES = {
 #     },
 # ]
 
-
-# Internationalization
-
-LANGUAGE_CODE = 'ar-EG'
-
-TIME_ZONE = 'Africa/Cairo'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files
-
-STATIC_URL = '/static/'
-
-LANGUAGE_CODE = 'ar'
-
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    'compressor.finders.CompressorFinder',
-]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-# STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'staticfiles'),]
-STATIC_ROOT = Path.joinpath(BASE_DIR / 'static',)
+# /////////////////////////////////////////////////////////////////////////
+# ! Security
+# if ENVIRONMENT == 'production':
+#     SECURE_BROWSER_XSS_FILTER = True
+#     X_FRAME_OPTIONS = 'DENY'
+#     SECURE_SSL_REDIRECT = True
+#     SECURE_HSTS_SECONDS = 3600
+#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#     SECURE_HSTS_PRELOAD = True
+#     SECURE_CONTENT_TYPE_NOSNIFF = True
+#     SESSION_COOKIE_SECURE = True
+#     CSRF_COOKIE_SECURE = True
+#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media/')
+# /////////////////////////////////////////////////////////////
+# ! django-debug-toolbar
 
-# Stripe
+# INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
 
-STRIPE_TEST_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
-STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
+# DEBUG_TOOLBAR_CONFIG = {
+#     'DISABLE_PANELS': [
+#         'debug_toolbar.panels.redirects.RedirectsPanel',
+#     ],
+#     'SHOW_TEMPLATE_CONTEXT': True,
+# }
+# DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False,}
 
-# Security
-if ENVIRONMENT == 'production':
-    SECURE_BROWSER_XSS_FILTER = True
-    X_FRAME_OPTIONS = 'DENY'
-    SECURE_SSL_REDIRECT = True
-    SECURE_HSTS_SECONDS = 3600
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# def show_toolbar(request):
+#     return True
+
+# DEBUG_TOOLBAR_CONFIG = {
+#     "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
+# }
+# //////////////////////////////////////////////////////////////

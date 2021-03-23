@@ -13,6 +13,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
+from django.views.defaults import page_not_found
+
 
 
 
@@ -160,8 +162,10 @@ def ContactUs(request):
 
 # ! Error Handlers
 
-def handler404(request, *args, **argv):
-    response = render('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
+def error_404(request, exception):
+        data = {}
+        return render(request,'errors/404.html', data)
+    
+# def error_500(request, exception):
+#         data = {}
+#         return render(request,'errors/500.html', data)

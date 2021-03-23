@@ -1,8 +1,10 @@
+from django.conf.urls import handler404
 from django.urls import path
 # from django.conf.urls import (
 # handler400, handler403, handler404, handler500
 # )
 from .views import *
+
 
 urlpatterns = [
     # ! Home 
@@ -26,5 +28,3 @@ urlpatterns = [
     path('job-application', JobApplicate, name='job'),
     path('contact-us', ContactUs, name='contact_us'),
 ]
-
-# handler404 = 'pages.views.handler404'

@@ -33,7 +33,7 @@ class Employee(models.Model):
     service = models.ForeignKey(Service, verbose_name=_("الخدمة"), on_delete=models.CASCADE, related_name='employee')
     id = models.AutoField(primary_key=True)
     name = models.CharField(_("اسم الموظف"), max_length=50)
-    photo = models.ImageField(_("صورة الموظف"))
+    photo = models.ImageField(_("صورة الموظف"), upload_to='employee_images')
     rate = models.CharField(_("تقييم الموظف من 5"), choices=CHOICES, max_length=2)
     about = models.CharField(_("معلومات الموظف"), max_length=225)
 
@@ -50,7 +50,7 @@ class SpareParts(models.Model):
     name = models.CharField(_("اسم القطعة"), max_length=225)
     price = MoneyField(_("سعر القطعة"), max_digits=14, decimal_places=2, default_currency='EGP')
     details = models.CharField(_("التفاصيل"), max_length=225)
-    photo = models.ImageField(_("صورة المنتج"))
+    photo = models.ImageField(_("صورة المنتج"), upload_to='SpareParts_images')
 
     def __str__(self):
         return self.name
