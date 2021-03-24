@@ -3,18 +3,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import *
 from django.core.mail import send_mail, EmailMessage
 from django.http import HttpResponse
-from service.models import Service, Employee, SpareParts, Request
+from service.models import Comment, Service, Employee, SpareParts, Request
 from django.contrib import messages
 from django.conf import settings
-from .forms import RequestJobForm
+from .forms import RequestJobForm, AddCommentForm
 from django.views.generic.edit import FormMixin
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.template import RequestContext
+from django.template import RequestContext, context
 from django.views.defaults import page_not_found
-
+from django.http import HttpResponseRedirect
+from django.contrib.auth import get_user_model
 
 
 
@@ -42,7 +43,7 @@ def ServiceEmployeesList(request, pk):
     }
     return render(request, 'service/employees.html', context)
 
-class EmployeeDetailView(LoginRequiredMixin, FormMixin, DetailView):
+# class EmployeeDetailView(LoginRequiredMixin, FormMixin, DetailView):
     model = Employee
     form_class = RequestJobForm
     login_url = "account_login"
@@ -67,6 +68,84 @@ class EmployeeDetailView(LoginRequiredMixin, FormMixin, DetailView):
         instance.employee = self.get_object()
         instance.save()
         return super(EmployeeDetailView, self).form_valid(form)
+
+    model = Employee
+    form_classes = {
+        'jobRequest_form': RequestJobForm,
+        'comment_form': AddCommentForm
+
+    }
+    login_url = "account_login"
+    template_name = "service/employee_detail.html"
+
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO,
+                                  'تم إرسال طلبك إلى الموظف بنجاح وسوف يواصل معك خلال 15 دقيقة')
+        return reverse('requests')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def jobRequest_form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+        instance.employee = self.get_object()
+        instance.save()
+        return super(EmployeeDetailView, self).form_valid(form)
+
+
+def EmplyeeDetail(request, pk):
+    employee = Employee.objects.get(pk=pk)
+    jobRequest = RequestJobForm(request.POST or None, prefix='job_request')
+    comment = AddCommentForm(request.POST or None, prefix='comment')
+
+    if request.method == 'POST':
+        if jobRequest.is_valid():
+            instance = jobRequest.save(commit=False)
+            instance.user = request.user
+            instance.employee = employee
+            instance.save()
+            messages.success(request, 'تم إرسال طلبك إلى الموظف بنجاح وسوف يواصل معك خلال 15 دقيقة')
+            return redirect('requests')
+
+        elif comment.is_valid():
+            instance = comment.save(commit=False)
+            instance.user = request.user
+            instance.employee = employee
+            instance.save()
+            return HttpResponseRedirect(request.path_info)
+        else:
+            jobRequest = RequestJobForm()
+            comment = AddCommentForm()
+
+    context = {
+        'employee': employee,
+        'jobRequest_form': jobRequest,
+        'comment_form': comment,
+    }
+    return render(request, 'service/employee_detail.html', context)
+
+    # if jobRequest_form.is_valid() or comment_form.is_valid():
+    #     def post(self, request, *args, **kwargs):
+    #         self.object = self.get_object()
+    #         form = self.get_form()
+    #         if form.is_valid():
+    #             return self.form_valid(form)
+    #         else:
+    #             return self.form_invalid(form)
+
+    #     def form_valid(self, form):
+    #         instance = form.save(commit=False)
+    #         instance.user = self.request.user
+    #         instance.employee = self.get_object()
+    #         instance.save()
+    #         return super(ADDCommentView, self).form_valid(form)
+
 
 
 # ! Requests

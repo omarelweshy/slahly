@@ -28,7 +28,6 @@ class Service(models.Model):
             verbose_name = _('الخدمة')
             verbose_name_plural = _('الخدمات')
 
-
 class Employee(models.Model):
     service = models.ForeignKey(Service, verbose_name=_("الخدمة"), on_delete=models.CASCADE, related_name='employee')
     id = models.AutoField(primary_key=True)
@@ -37,13 +36,37 @@ class Employee(models.Model):
     rate = models.CharField(_("تقييم الموظف من 5"), choices=CHOICES, max_length=2)
     about = models.CharField(_("معلومات الموظف"), max_length=225)
 
-
     def __str__(self):
         return self.name
 
     class Meta:
             verbose_name = _('الموظف')
             verbose_name_plural = _('الموظفين')
+
+
+class EmployeeWOrkImages(models.Model):
+    employee = models.ForeignKey(Employee, verbose_name=_("العامل"), on_delete=models.CASCADE, related_name='work_image')
+    images = models.ImageField(_("صورة العمل"), upload_to='employee_work_images', height_field=None, width_field=None, max_length=None)
+
+    class Meta:
+            verbose_name = _('صورة العمل')
+            verbose_name_plural = _('صور العمل')
+
+class Comment(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='comments')
+    comment = models.CharField(_("التعليق"), max_length=250)
+    created_at = models.DateTimeField(_("وقت التعليق"), auto_now=True)
+
+    def __str__(self):
+        return 'التعليقات على الموظف %s' % self.employee
+
+    def get_absolute_url(self):
+        return reverse('employee_detail', kwargs={'pk':self.pk})
+    class Meta:
+            verbose_name = _('التعليق')
+            verbose_name_plural = _('التعليقات')
+    
 
 class SpareParts(models.Model):
     service = models.ForeignKey(Service, verbose_name=_("الخدمة"), on_delete=models.CASCADE, related_name='spare_part')

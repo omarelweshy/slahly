@@ -13,7 +13,8 @@ urlpatterns = [
     # ! Service
     path('service', ServiceListView.as_view(), name='service'),
     path('service/<int:pk>', ServiceEmployeesList, name='employees'),
-    path('employee/<int:pk>', EmployeeDetailView.as_view(), name='employee_detail'),
+    # path('employee/<int:pk>', EmployeeDetailView.as_view(), name='employee_detail'),
+    path('employee/<int:pk>', EmplyeeDetail, name='employee_detail'),
 
     # ! Requests 
     path('requests', Requests, name='requests'),

@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
-from django.conf import settings
-from django.urls import reverse
 
 GENDER_CHOICES = [('MALE', 'أنثى'), ('FEMALE', 'ذكر')]
 

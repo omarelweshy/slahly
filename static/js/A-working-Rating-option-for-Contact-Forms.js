@@ -1,4 +1,4 @@
-var $star_rating = $(".star-rating .fa");
+var $star_rating = $(".star-rating .fa")
 
 var SetRatingStar = function () {
   return $star_rating.each(function () {
@@ -6,17 +6,17 @@ var SetRatingStar = function () {
       parseInt($star_rating.siblings("input.rating-value").val()) >=
       parseInt($(this).data("rating"))
     ) {
-      return $(this).removeClass("fa-star-o").addClass("fa-star");
+      return $(this).removeClass("fa-star-o").addClass("fa-star")
     } else {
-      return $(this).removeClass("fa-star").addClass("fa-star-o");
+      return $(this).removeClass("fa-star").addClass("fa-star-o")
     }
-  });
-};
+  })
+}
 
 // $star_rating.on(function () {
-//   $star_rating.siblings("input.rating-value").val($(this).data("rating"));
-//   return SetRatingStar();
-// });
+//   $star_rating.siblings("input.rating-value").val($(this).data("rating"))
+//   return SetRatingStar()
+// })
 
-SetRatingStar();
-$(document).ready(function () {});
+SetRatingStar()
+$(document).ready(function () {})
