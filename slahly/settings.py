@@ -15,6 +15,9 @@ DEBUG = int(env('DEBUG', default=0))
 # ! Application definition
 
 INSTALLED_APPS = [
+    # Django Admin Interface
+    # 'admin_interface',
+    # 'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'djmoney',
     "compressor",
+    
 ]
 
 MIDDLEWARE = [
@@ -163,7 +167,7 @@ STATICFILES_FINDERS = [
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'staticfiles'),]
+# STATICFILES_DIRS = [Path.joinpath(BASE_DIR / 'staticfiles'),]
 STATIC_ROOT = Path.joinpath(BASE_DIR / 'static',)
 
 MEDIA_URL = '/media/'

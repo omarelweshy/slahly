@@ -1,0 +1,206 @@
+@font-face {
+    font-family: "Almarai";
+    src: URL("../fonts/Almarai-Bold.ttf") format("truetype");
+    src: URL("../fonts/Almarai-ExtraBold.ttf") format("truetype");
+    src: URL("../fonts/Almarai-Light.ttf") format("truetype");
+    src: URL("../fonts/Almarai-Regular.ttf") format("truetype");
+  }
+  
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: rgb(197, 177, 0);
+    font-family: "Almarai";
+}
+
+#header {
+    background: #4e73df;
+    color: #fff;
+    font-family: "Almarai";
+
+}
+#header a:link, #header a:visited {
+    color: #fff;
+    font-family: "Almarai";
+}
+
+#header a:hover {
+    color: #fff;
+    font-family: "Almarai";
+}
+
+div.breadcrumbs {
+    background: #4e73df;
+    color: #c4dce8;
+    font-family: "Almarai";
+}
+div.breadcrumbs a.active {
+    color: #c4dce8;
+/* !important; */
+    font-weight: 300;
+    font-family: "Almarai";
+}
+
+div.breadcrumbs a:focus, div.breadcrumbs a:hover {
+    color: #c4dce8;
+    /* !important; */
+    font-weight: 300;
+    font-family: "Almarai";
+}
+
+.select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected] {
+    background-color: #292D32;
+    font-family: "Almarai";
+}
+
+.paginator a:link, .paginator a:visited {
+    background: #292D32;
+    font-family: "Almarai";
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #4e73df;
+    font-family: "Almarai";
+}
+.button:hover, input[type=submit]:hover, input[type=button]:hover {
+    background: #878787;
+    font-family: "Almarai";
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #4e73df;
+    font-family: "Almarai";
+}
+#user-tools a:focus, #user-tools a:hover {
+    border: 0;
+    color: #ddd;
+    font-family: "Almarai";
+}
+
+.selector-chosen h2 {
+    background: #4e73df !important;
+    font-family: "Almarai";
+}
+
+.calendar td.selected a {
+    background: #4e73df !important;
+    font-family: "Almarai";
+}
+
+.calendar td a:focus, .timelist a:focus,
+.calendar td a:hover, .timelist a:hover {
+    background: #4e73df !important;
+    font-family: "Almarai";
+}
+
+#changelist-filter li.selected a {
+    color: #444;
+    font-family: "Almarai";
+}
+
+fieldset.collapsed .collapse-toggle {
+    color: #444;
+    font-family: "Almarai";
+}
+
+a:link, a:visited {
+    color: #6c7db3;
+    font-family: "Almarai";
+}
+
+a:focus, a:hover {
+    color: 4e73df;
+    font-family: "Almarai";
+}
+
+table thead th.sorted .sortoptions a.sortremove:focus:after,
+table thead th.sorted .sortoptions a.sortremove:hover:after {
+    color: #444;
+    font-family: "Almarai";
+}
+
+a.active.selector-chooseall:focus, a.active.selector-clearall:focus,
+a.active.selector-chooseall:hover, a.active.selector-clearall:hover {
+    color: 4e73df;
+    font-family: "Almarai";
+}
+
+.calendar td a:active, .timelist a:active {
+    background: #444;
+    font-family: "Almarai";
+}
+
+.change-list ul.toplinks .date-back a:focus,
+.change-list ul.toplinks .date-back a:hover {
+    color: #222;
+    font-family: "Almarai";
+}
+
+.paginator a.showall:focus, .paginator a.showall:hover {
+    color: #222;
+    font-family: "Almarai";
+}
+
+.paginator a:focus, .paginator a:hover {
+    background: #222;
+    font-family: "Almarai";
+}
+
+#changelist-filter a:focus, #changelist-filter a:hover,
+#changelist-filter li.selected a:focus,
+#changelist-filter li.selected a:hover {
+    color: #222;
+    font-family: "Almarai";
+}
+
+.calendar td a:active, .timelist a:active {
+    background: #292D32;
+    color: white;
+    font-family: "Almarai";
+}
+
+.calendar caption, .calendarbox h2 {
+    background: 4e73df;
+    font-family: "Almarai";
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #4e73df;
+    font-family: "Almarai";
+}
+
+.button.default:hover, input[type=submit].default:hover {
+    background: #191D22;
+    font-family: "Almarai";
+}
+
+.select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected] {
+    background-color: #292D32;
+    font-family: "Almarai";
+}
+
+.button.default, input[type=submit].default, .submit-row input.default {
+    background: #4e73df;
+    font-family: "Almarai";
+}
+
+.object-tools a:focus, .object-tools a:hover {
+    background-color: #292D32;
+    font-family: "Almarai";
+}
+
+input[type=file]::-webkit-file-upload-button:hover {
+    border: 0;
+    background: #292D32;
+    font-family: "Almarai";
+}
+
+#changelist-filter {
+    top: -250px;
+    right: 15px;
+    font-family: "Almarai";
+}
+
+#changelist-filter h2 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: "Almarai";
+}

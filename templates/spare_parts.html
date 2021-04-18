@@ -1,8 +1,5 @@
 {% extends '_base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-
 
 {% block content %}        
 <body>
@@ -37,7 +34,6 @@
                                 <!-- {% csrf_token %} -->
                             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ stripe_key }}" data-description="{{part.name}}" data-amount="{{part.price_currency}}"></script>
                         <!-- </form> -->
-                            <button class="btn btn-success" type="submit">توصيل</button>
                         </td>
                     </tr>
                     {% endfor %}
