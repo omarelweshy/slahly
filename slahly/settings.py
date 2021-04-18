@@ -3,7 +3,7 @@ To use the application you should comment init SECRET_KEY, DEBUG, DATABASE.
 For SECRET_KEY you can user the key commented beside.
 For DEBUG you can user True.
 For DATABASE you can comment MySQL or reconfig it or comment out SQLite3 Database
-For Stripe you can will find constractions below
+For Stripe and email you can will find constractions below
 """
 
 from pathlib import Path
@@ -180,8 +180,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER') # User any email
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') # User any password
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Stripe
