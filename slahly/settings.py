@@ -1,23 +1,26 @@
+"""
+To use the application you should comment init SECRET_KEY, DEBUG, DATABASE.
+For SECRET_KEY you can user the key commented beside.
+For DEBUG you can user True.
+For DATABASE you can comment MySQL or reconfig it or comment out SQLite3 Database
+For Stripe you can will find constractions below
+"""
+
 from pathlib import Path
-# from django.contrib.messages import constants as messages
-# import os
 import environ
 
 #  ! ENV
 env = environ.Env()
 environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = int(env('DEBUG', default=0))
+SECRET_KEY = env('SECRET_KEY') # 'tm9vlx8c3#xb5@z17!8n(=-8g6bj9(-d!@6cn$r+_#%qd#3j_c'
+DEBUG = int(env('DEBUG', default=0)) # True
 # ENVIRONMENT = env('ENVIRONMENT', default='development')
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Application definition
 
 INSTALLED_APPS = [
-    # Django Admin Interface
-    # 'admin_interface',
-    # 'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,14 +132,11 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql', 
-#         'NAME': 'slahly',
-#         'USER': 'admin',
-#         'PASSWORD': 'root',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
@@ -189,38 +189,27 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 STRIPE_TEST_PUBLISHABLE_KEY = env('STRIPE_TEST_PUBLISHABLE_KEY')
 STRIPE_TEST_SECRET_KEY = env('STRIPE_TEST_SECRET_KEY')
 
+# For any other user uncomment this and comment two lines above
+# STRIPE_TEST_PUBLISHABLE_KEY = '0'
+# STRIPE_TEST_SECRET_KEY = '0'
+
 # /////////////////////////////////////////////////////////////////////////
 # ! Password validation
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
-
-# /////////////////////////////////////////////////////////////////////////
-# ! Security
-# if ENVIRONMENT == 'production':
-#     SECURE_BROWSER_XSS_FILTER = True
-#     X_FRAME_OPTIONS = 'DENY'
-#     SECURE_SSL_REDIRECT = True
-#     SECURE_HSTS_SECONDS = 3600
-#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#     SECURE_HSTS_PRELOAD = True
-#     SECURE_CONTENT_TYPE_NOSNIFF = True
-#     SESSION_COOKIE_SECURE = True
-#     CSRF_COOKIE_SECURE = True
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 # /////////////////////////////////////////////////////////////
 # ! django-debug-toolbar
