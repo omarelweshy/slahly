@@ -17,9 +17,6 @@ class User(AbstractUser):
         verbose_name = _('المستخدم')
         verbose_name_plural = _('المستخدمين')
 
-    # def get_absolute_url(self):
-    #     return reverse('profile_detail', args=[str(self.slug)])
-
     @property
     def full_name(self):
         """Returns the person's full name."""

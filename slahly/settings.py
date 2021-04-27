@@ -32,9 +32,11 @@ INSTALLED_APPS = [
 
     # Apps
     'users.apps.UsersConfig',
-    'pages.apps.PagesConfig',
     'service.apps.ServiceConfig',
-    'orders.apps.OrdersConfig',
+    'contact.apps.ContactConfig',
+    'employee.apps.EmployeeConfig',
+    'request.apps.RequestConfig',
+    'store.apps.StoreConfig',
 
     # 3td party apps
     'allauth',
@@ -122,23 +124,23 @@ TEMPLATES = [
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': env('DATABASE_NAME'),
-        'USER': env('DATABASE_USER'),
-        'PASSWORD': env('DATABASE_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': env('DATABASE_NAME'),
+#         'USER': env('DATABASE_USER'),
+#         'PASSWORD': env('DATABASE_PASSWORD'),
+#         'HOST': 'localhost',
+#         'PORT': '3306',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Internationalization
