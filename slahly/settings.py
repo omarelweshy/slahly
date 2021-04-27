@@ -1,9 +1,5 @@
 """
-To use the application you should comment init SECRET_KEY, DEBUG, DATABASE.
-For SECRET_KEY you can user the key commented beside.
-For DEBUG you can user True.
-For DATABASE you can comment MySQL or reconfig it or comment out SQLite3 Database
-For Stripe and email you can will find constractions below
+
 """
 
 from pathlib import Path
@@ -212,24 +208,3 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-# /////////////////////////////////////////////////////////////
-# ! django-debug-toolbar
-
-# INTERNAL_IPS = ('127.0.0.1', '10.0.2.2',)
-
-# DEBUG_TOOLBAR_CONFIG = {
-#     'DISABLE_PANELS': [
-#         'debug_toolbar.panels.redirects.RedirectsPanel',
-#     ],
-#     'SHOW_TEMPLATE_CONTEXT': True,
-# }
-# DEBUG_TOOLBAR_CONFIG = {'INTERCEPT_REDIRECTS': False,}
-
-# def show_toolbar(request):
-#     return True
-
-# DEBUG_TOOLBAR_CONFIG = {
-#     "SHOW_TOOLBAR_CALLBACK" : lambda request: True,
-# }
-# //////////////////////////////////////////////////////////////
