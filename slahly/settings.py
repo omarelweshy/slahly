@@ -1,17 +1,9 @@
-"""
-
-"""
-
 from pathlib import Path
-import environ
+from .secrets import *
 
-#  ! ENV
-env = environ.Env()
-environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = env('SECRET_KEY') # 'tm9vlx8c3#xb5@z17!8n(=-8g6bj9(-d!@6cn$r+_#%qd#3j_c'
-DEBUG = int(env('DEBUG', default=0)) # True
-# ENVIRONMENT = env('ENVIRONMENT', default='development')
+SECRET_KEY = 'tm9vlx8c3#xb5@z17!8n(=-8g6bj9(-d!@6cn$r+_#%qd#3j_c'
+DEBUG = True
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Application definition
@@ -62,7 +54,7 @@ ALLOW_UNICODE_SLUGS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ALLOWED_HOSTS = ['*']
 SITE_ID = 1
-COMPRESS_ENABLED = env('COMPRESS_ENABLED')
+COMPRESS_ENABLED = True
 WSGI_APPLICATION = 'slahly.wsgi.application'
 
 # /////////////////////////////////////////////////////////////////////////
@@ -123,9 +115,9 @@ TEMPLATES = [
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql', 
-#         'NAME': env('DATABASE_NAME'),
-#         'USER': env('DATABASE_USER'),
-#         'PASSWORD': env('DATABASE_PASSWORD'),
+#         'NAME': DATABASE_NAME,
+#         'USER': DATABASE_USER,
+#         'PASSWORD': DATABASE_PASSWORD,
 #         'HOST': 'localhost',
 #         'PORT': '3306',
 #     }
@@ -178,18 +170,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER') # User any email
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD') # User any password
+EMAIL_HOST_USER = EMAIL_HOST_USER # User any email
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD # User any password
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Stripe
-
-STRIPE_TEST_PUBLISHABLE_KEY = env('STRIPE_TEST_PUBLISHABLE_KEY')
-STRIPE_TEST_SECRET_KEY = env('STRIPE_TEST_SECRET_KEY')
-
-# For any other user uncomment this and comment two lines above
+# For any other user uncomment this and comment two lines above 
+# but you can't pay at store
 # STRIPE_TEST_PUBLISHABLE_KEY = '0'
 # STRIPE_TEST_SECRET_KEY = '0'
+
+STRIPE_TEST_PUBLISHABLE_KEY = STRIPE_TEST_PUBLISHABLE_KEY
+STRIPE_TEST_SECRET_KEY = STRIPE_TEST_SECRET_KEY
+
 
 # /////////////////////////////////////////////////////////////////////////
 # ! Password validation

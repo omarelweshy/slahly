@@ -56,7 +56,7 @@
 
 <hr>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner" style="width: 90%; height: 150px; margin-left: auto; margin-right: auto;">
+    <div class="carousel-inner" style="width: 90%; height: 360px; margin-left: auto; margin-right: auto;">
         {% for image in employee.work_image.all %}
         <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
             <img class="d-block w-100" src="{{image.images.url}}" alt="First slide">
